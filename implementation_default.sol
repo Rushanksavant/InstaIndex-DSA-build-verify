@@ -3,10 +3,6 @@ pragma experimental ABIEncoderV2;
 
 import {Variables} from "../variables.sol";
 
-interface IndexInterface {
-    function list() external view returns (address);
-}
-
 interface ListInterface {
     function addAuth(address user) external;
 
@@ -45,35 +41,6 @@ contract Record is Constants {
      */
     function isBeta() public view returns (bool) {
         return _beta;
-    }
-
-    /**
-     * @dev Enable New User.
-     * @param user Owner address
-     */
-    function enable(address user) public {
-        require(
-            msg.sender == address(this) || msg.sender == instaIndex,
-            "not-self-index"
-        );
-        require(user != address(0), "not-valid");
-        require(!_auth[user], "already-enabled");
-        _auth[user] = true;
-        ListInterface(IndexInterface(instaIndex).list()).addAuth(user);
-        emit LogEnableUser(user);
-    }
-
-    /**
-     * @dev Disable User.
-     * @param user Owner address
-     */
-    function disable(address user) public {
-        require(msg.sender == address(this), "not-self");
-        require(user != address(0), "not-valid");
-        require(_auth[user], "already-disabled");
-        delete _auth[user];
-        ListInterface(IndexInterface(instaIndex).list()).removeAuth(user);
-        emit LogDisableUser(user);
     }
 
     function toggleBeta() public {
