@@ -1,22 +1,20 @@
 pragma solidity ^0.7.0;
 
+import 'C:/Users/rssav/Desktop/InstaDapp Verify/Contracts/autoFinder_InstaAccount.sol';
+
 /**
  * @title InstaList
  * @dev Registry For DeFi Smart Account Authorised user.
  */
 
-interface AccountInterface {
-    function isAuth(address _user) external view returns (bool);
-}
-
 
 contract DSMath {
 
-    function add(uint64 x, uint64 y) internal pure returns (uint64 z) {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00080000, 1037618708488) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00080001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00081000, x) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00081001, y) }
+    function add(uint64 x, uint64 y) internal pure returns (uint64 z) {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000c0000, 1037618708492) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000c0001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000c1000, x) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000c1001, y) }
         require((z = x + y) >= x, "ds-math-add-overflow");
     }
 
-    function sub(uint64 x, uint64 y) internal pure returns (uint64 z) {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000b0000, 1037618708491) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000b0001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000b1000, x) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000b1001, y) }
+    function sub(uint64 x, uint64 y) internal pure returns (uint64 z) {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000f0000, 1037618708495) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000f0001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000f1000, x) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000f1001, y) }
         require((z = x - y) <= x, "ds-math-sub-underflow");
     }
 
@@ -81,7 +79,7 @@ contract Configure is VariablesList {
      * @param _owner Account Owner.
      * @param _account Smart Account Address.
     */
-    function addAccount(address _owner, uint64 _account) internal {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00060000, 1037618708486) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00060001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00061000, _owner) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00061001, _account) }
+    function addAccount(address _owner, uint64 _account) internal {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000a0000, 1037618708490) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000a0001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000a1000, _owner) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000a1001, _account) }
         if (userLink[_owner].last != 0) {
             userList[_owner][_account].prev = userLink[_owner].last;
             userList[_owner][userLink[_owner].last].next = _account;
@@ -96,7 +94,7 @@ contract Configure is VariablesList {
      * @param _owner Account Owner/User.
      * @param _account Smart Account Address.
     */
-    function removeAccount(address _owner, uint64 _account) internal {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00070000, 1037618708487) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00070001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00071000, _owner) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00071001, _account) }
+    function removeAccount(address _owner, uint64 _account) internal {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000b0000, 1037618708491) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000b0001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000b1000, _owner) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000b1001, _account) }
         uint64 _prev = userList[_owner][_account].prev;
         uint64 _next = userList[_owner][_account].next;
         if (_prev != 0) userList[_owner][_prev].next = _next;
@@ -112,7 +110,7 @@ contract Configure is VariablesList {
      * @param _owner Account Owner.
      * @param _account Smart Account Address.
     */
-    function addUser(address _owner, uint64 _account) internal {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00090000, 1037618708489) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00090001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00091000, _owner) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00091001, _account) }
+    function addUser(address _owner, uint64 _account) internal {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000d0000, 1037618708493) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000d0001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000d1000, _owner) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000d1001, _account) }
         if (accountLink[_account].last != address(0)) {
             accountList[_account][_owner].prev = accountLink[_account].last;
             accountList[_account][accountLink[_account].last].next = _owner;
@@ -127,7 +125,7 @@ contract Configure is VariablesList {
      * @param _owner Account Owner.
      * @param _account Smart Account Address.
     */
-    function removeUser(address _owner, uint64 _account) internal {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000a0000, 1037618708490) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000a0001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000a1000, _owner) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000a1001, _account) }
+    function removeUser(address _owner, uint64 _account) internal {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000e0000, 1037618708494) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000e0001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000e1000, _owner) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000e1001, _account) }
         address _prev = accountList[_account][_owner].prev;
         address _next = accountList[_account][_owner].next;
         if (_prev != address(0)) accountList[_account][_prev].next = _next;
@@ -141,6 +139,7 @@ contract Configure is VariablesList {
 }
 
 contract InstaList is Configure {
+    InstaAccount accountContract;
     constructor (address _instaIndex) public Configure(_instaIndex) {}
 
 
@@ -150,7 +149,7 @@ contract InstaList is Configure {
     */
     function addAuth(address _owner) external {
         require(accountID[msg.sender] != 0, "not-account");
-        require(AccountInterface(msg.sender).isAuth(_owner), "not-owner");
+        require(accountContract.isAuth(_owner), "not-owner"); // *** Replaced AccountInterface(_account) with InstaAccount *** //
         addAccount(_owner, accountID[msg.sender]);
         addUser(_owner, accountID[msg.sender]);
     }
@@ -161,7 +160,7 @@ contract InstaList is Configure {
     */
     function removeAuth(address _owner) external {
         require(accountID[msg.sender] != 0, "not-account");
-        require(!AccountInterface(msg.sender).isAuth(_owner), "already-owner");
+        require(!accountContract.isAuth(_owner), "already-owner"); // *** Replaced AccountInterface(_account) with InstaAccount *** //
         removeAccount(_owner, accountID[msg.sender]);
         removeUser(_owner, accountID[msg.sender]);
     }

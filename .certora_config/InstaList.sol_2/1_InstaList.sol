@@ -1,13 +1,11 @@
 pragma solidity ^0.7.0;
 
+import "./InstaAccount.sol";
+
 /**
  * @title InstaList
  * @dev Registry For DeFi Smart Account Authorised user.
  */
-
-interface AccountInterface {
-    function isAuth(address _user) external view returns (bool);
-}
 
 
 contract DSMath {
@@ -141,6 +139,7 @@ contract Configure is VariablesList {
 }
 
 contract InstaList is Configure {
+    InstaAccount accountContract;
     constructor (address _instaIndex) public Configure(_instaIndex) {}
 
 
@@ -150,7 +149,7 @@ contract InstaList is Configure {
     */
     function addAuth(address _owner) external {
         require(accountID[msg.sender] != 0, "not-account");
-        require(AccountInterface(msg.sender).isAuth(_owner), "not-owner");
+        require(accountContract.isAuth(_owner), "not-owner"); // *** Replaced AccountInterface(_account) with InstaAccount *** //
         addAccount(_owner, accountID[msg.sender]);
         addUser(_owner, accountID[msg.sender]);
     }
@@ -161,7 +160,7 @@ contract InstaList is Configure {
     */
     function removeAuth(address _owner) external {
         require(accountID[msg.sender] != 0, "not-account");
-        require(!AccountInterface(msg.sender).isAuth(_owner), "already-owner");
+        require(!accountContract.isAuth(_owner), "already-owner"); // *** Replaced AccountInterface(_account) with InstaAccount *** //
         removeAccount(_owner, accountID[msg.sender]);
         removeUser(_owner, accountID[msg.sender]);
     }
