@@ -1,0 +1,13 @@
+{
+    "topics": [
+        {
+            "name": "solc",
+            "messages": [
+                {
+                    "message": "C:\\Users\\rssav\\Desktop\\InstaDapp Verify\\Contracts\\InstaIndex.sol:191:13: TypeError: Member \"cast\" not found or not visible after argument-dependent lookup in contract InstaDefaultImplementation.",
+                    "location": []
+                }
+            ]
+        }
+    ]
+}

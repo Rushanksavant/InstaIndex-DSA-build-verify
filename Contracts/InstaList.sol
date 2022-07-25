@@ -23,7 +23,7 @@ contract DSMath {
 }
 
 
-contract Variables is DSMath {
+contract VariablesList is DSMath {
 
     // InstaIndex Address.
     address public immutable instaIndex;
@@ -71,9 +71,9 @@ contract Variables is DSMath {
 
 }
 
-contract Configure is Variables {
+contract Configure is VariablesList {
 
-    constructor (address _instaIndex) Variables(_instaIndex) {
+    constructor (address _instaIndex) VariablesList(_instaIndex) {
     }
 
     /**

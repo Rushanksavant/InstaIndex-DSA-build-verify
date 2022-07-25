@@ -1,5 +1,7 @@
 pragma solidity ^0.7.0;
 pragma experimental ABIEncoderV2;
+import "./InstaList.sol";
+import "./InstaDefaultImplementation.sol";
 
 /**
  * @title InstaIndex
@@ -7,23 +9,12 @@ pragma experimental ABIEncoderV2;
  * Also Registry for DeFi Smart Accounts.
  */
 
-interface AccountInterface {
-    function version() external view returns (uint256);
-
-    function enable(address authority) external;
-
-    function cast(
-        address[] calldata _targets,
-        bytes[] calldata _datas,
-        address _origin
-    ) external payable returns (bytes32[] memory responses);
-}
-
-interface ListInterface {
-    function init(address _account) external;
-}
-
 contract AddressIndex {
+
+    // *** implementation pointers *** //
+    InstaDefaultImplementation accountImplementation;
+    InstaList listContract;
+
     event LogNewMaster(address indexed master);
     event LogUpdateMaster(address indexed master);
     event LogNewCheck(uint256 indexed accountVersion, address indexed check);
@@ -38,7 +29,7 @@ contract AddressIndex {
     // Master Address.
     address public master;
     // List Registry Address.
-    address public list;
+    // address public list;
 
     // Connectors Modules(Account Module Version => Connectors Registry Module Address).
     mapping(uint256 => address) public connectors;
@@ -105,7 +96,7 @@ contract AddressIndex {
         require(_newAccount != address(0), "not-valid-address");
         versionCount++;
         require(
-            AccountInterface(_newAccount).version() == versionCount,
+            accountImplementation.version() == versionCount,
             "not-valid-version"
         );
         account[versionCount] = _newAccount;
@@ -197,7 +188,7 @@ contract InstaIndex is CloneFactory {
     ) external payable returns (address _account) {
         _account = build(_owner, accountVersion, _origin);
         if (_targets.length > 0)
-            AccountInterface(_account).cast{value: msg.value}(
+            accountImplementation.cast{value: msg.value}( // *** Replaced AccountInterface(_account) with InstaDefaultImplementation *** //
                 _targets,
                 _datas,
                 _origin
@@ -220,8 +211,8 @@ contract InstaIndex is CloneFactory {
             "not-valid-account"
         );
         _account = createClone(accountVersion);
-        ListInterface(list).init(_account);
-        AccountInterface(_account).enable(_owner);
+        listContract.init(_account);    // *** Relaced interface with implementation *** //
+        accountImplementation.enable(_owner);
         emit LogAccountCreated(msg.sender, _owner, _account, _origin);
     }
 
@@ -240,14 +231,14 @@ contract InstaIndex is CloneFactory {
     ) external {
         require(
             master == address(0) &&
-                list == address(0) &&
+                // list == address(0) &&
                 account[1] == address(0) &&
                 connectors[1] == address(0) &&
                 versionCount == 0,
             "already-defined"
         );
         master = _master;
-        list = _list;
+        // list = _list;
         versionCount++;
         account[versionCount] = _account;
         connectors[versionCount] = _connectors;
