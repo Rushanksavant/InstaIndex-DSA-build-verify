@@ -12,7 +12,7 @@ import "./InstaAccount.sol";
 contract AddressIndex {
 
     // *** implementation pointers *** //
-    InstaAccount accountContract;
+    InstaAccount accountImplementation;
     InstaList listContract;
 
     event LogNewMaster(address indexed master);
@@ -96,7 +96,7 @@ contract AddressIndex {
         require(_newAccount != address(0), "not-valid-address");
         versionCount++;
         require(
-            accountContract.version() == versionCount,
+            accountImplementation.version() == versionCount,
             "not-valid-version"
         );
         account[versionCount] = _newAccount;
@@ -188,7 +188,7 @@ contract InstaIndex is CloneFactory {
     ) external payable returns (address _account) {
         _account = build(_owner, accountVersion, _origin);
         if (_targets.length > 0)
-            accountContract.cast{value: msg.value}( // *** Replaced AccountInterface(_account) with InstaDefaultImplementation *** //
+            accountImplementation.cast{value: msg.value}( // *** Replaced AccountInterface(_account) with InstaDefaultImplementation *** //
                 _targets,
                 _datas,
                 _origin
@@ -212,7 +212,7 @@ contract InstaIndex is CloneFactory {
         );
         _account = createClone(accountVersion);
         listContract.init(_account);    // *** Relaced interface with implementation *** //
-        accountContract.enable(_owner);
+        accountImplementation.enable(_owner);
         emit LogAccountCreated(msg.sender, _owner, _account, _origin);
     }
 
