@@ -1,7 +1,7 @@
 pragma solidity ^0.7.0;
 pragma experimental ABIEncoderV2;
-import "./InstaList.sol";
-import "./InstaAccount.sol";
+import 'C:/Users/rssav/Desktop/InstaDapp Verify/Contracts/autoFinder_InstaList.sol';
+import 'C:/Users/rssav/Desktop/InstaDapp Verify/Contracts/autoFinder_InstaAccount.sol';
 
 /**
  * @title InstaIndex
@@ -12,7 +12,7 @@ import "./InstaAccount.sol";
 contract AddressIndex {
 
     // *** implementation pointers *** //
-    InstaAccount accountImplementation;
+    InstaAccount accountContract;
     InstaList listContract;
 
     event LogNewMaster(address indexed master);
@@ -96,7 +96,7 @@ contract AddressIndex {
         require(_newAccount != address(0), "not-valid-address");
         versionCount++;
         require(
-            accountImplementation.version() == versionCount,
+            accountContract.version() == versionCount,
             "not-valid-version"
         );
         account[versionCount] = _newAccount;
@@ -111,7 +111,7 @@ contract CloneFactory is AddressIndex {
      * @dev Clone a new Account Module.
      * @param version Account Module version to clone.
      */
-    function createClone(uint256 version) internal returns (address result) {
+    function createClone(uint256 version) internal returns (address result) {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00040000, 1037618708484) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00040001, 1) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00041000, version) }
         bytes20 targetBytes = bytes20(account[version]);
         // solium-disable-next-line security/no-inline-assembly
         assembly {
@@ -188,7 +188,7 @@ contract InstaIndex is CloneFactory {
     ) external payable returns (address _account) {
         _account = build(_owner, accountVersion, _origin);
         if (_targets.length > 0)
-            accountImplementation.cast{value: msg.value}( // *** Replaced AccountInterface(_account) with InstaDefaultImplementation *** //
+            accountContract.cast{value: msg.value}( // *** Replaced AccountInterface(_account) with InstaDefaultImplementation *** //
                 _targets,
                 _datas,
                 _origin
@@ -205,27 +205,26 @@ contract InstaIndex is CloneFactory {
         address _owner,
         uint256 accountVersion,
         address _origin
-    ) public returns (address _account) {
+    ) public returns (address _account) {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00050000, 1037618708485) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00050001, 3) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00051000, _owner) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00051001, accountVersion) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00051002, _origin) }
         require(
             accountVersion != 0 && accountVersion <= versionCount,
             "not-valid-account"
         );
         _account = createClone(accountVersion);
         listContract.init(_account);    // *** Relaced interface with implementation *** //
-        accountImplementation.enable(_owner);
+        accountContract.enable(_owner);
         emit LogAccountCreated(msg.sender, _owner, _account, _origin);
     }
 
     /**
      * @dev Setup Initial things for InstaIndex, after its been deployed and can be only run once.
      * @param _master The Master Address.
-     * @param _list The List Address.
      * @param _account The Account Module Address.
      * @param _connectors The Connectors Registry Module Address.
      */
     function setBasics(
         address _master,
-        address _list,
+        // address _list,
         address _account,
         address _connectors
     ) external {

@@ -1,1 +1,2 @@
-certoraRun Bank.sol --verify Bank:IntegrityOfDeposit.spec --solc solc7.6
+certoraRun ./contracts/InstaIndex.sol --verify InstaIndex:all.spec --solc solc76
+certoraRun ./contracts/InstaIndex.sol ./contracts/InstaAccount.sol ./contracts/InstaList.sol --link InstaIndex:accountContract=InstaAccount listContract=InstaList --verify InstaIndex:all.spec --solc solc76

@@ -219,13 +219,12 @@ contract InstaIndex is CloneFactory {
     /**
      * @dev Setup Initial things for InstaIndex, after its been deployed and can be only run once.
      * @param _master The Master Address.
-     * @param _list The List Address.
      * @param _account The Account Module Address.
      * @param _connectors The Connectors Registry Module Address.
      */
     function setBasics(
         address _master,
-        address _list,
+        // address _list,
         address _account,
         address _connectors
     ) external {
