@@ -16,8 +16,8 @@
         },
         "contracts": [
             "InstaAccount",
-            "InstaList",
-            "InstaIndex"
+            "InstaIndex",
+            "InstaList"
         ],
         "debug": null,
         "debug_topics": false,
@@ -29,9 +29,9 @@
         "env": "production",
         "expected_file": "expected.json",
         "file_paths": [
+            "Contracts\\InstaList.sol",
             "Contracts\\InstaIndex.sol",
-            "Contracts\\InstaAccount.sol",
-            "Contracts\\InstaList.sol"
+            "Contracts\\InstaAccount.sol"
         ],
         "file_to_contract": {
             "Contracts\\InstaAccount.sol": [
@@ -121,7 +121,7 @@
         ]
     },
     "cwd_relative": ".",
-    "dirty": true,
+    "dirty": false,
     "origin": "https://github.com/Rushanksavant/instadapp-verify.git",
     "raw_args": [
         "C:\\Users\\rssav\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\certoraRun",
@@ -136,6 +136,6 @@
         "--solc",
         "solc76"
     ],
-    "revision": "982939ebf745ee0f1400fc91e69a87f064df485a",
-    "timestamp": "1658796706.841323"
+    "revision": "ee26f7cf49b33fb30394dc548c49e9f84b28011f",
+    "timestamp": "1658813298.915353"
 }
