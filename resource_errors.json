@@ -1,3 +1,13 @@
 {
-    "topics": []
+    "topics": [
+        {
+            "name": "solc",
+            "messages": [
+                {
+                    "message": "C:\\Users\\rssav\\Desktop\\InstaDapp Verify\\Contracts\\InstaAccount.sol:89:1: DeclarationError: Identifier already declared.",
+                    "location": []
+                }
+            ]
+        }
+    ]
 }

@@ -6,11 +6,9 @@ pragma experimental ABIEncoderV2;
  * @dev DeFi Smart Account Wallet.
  */
 
-interface IndexInterface {
-    function connectors(uint version) external view returns (address);
-    function check(uint version) external view returns (address);
-    function list() external view returns (address);
-}
+import "./InstaIndex.sol";
+import "./InstaList.sol";
+
 
 interface ConnectorsInterface {
     function isConnector(address[] calldata logicAddr) external view returns (bool);
@@ -21,13 +19,11 @@ interface CheckInterface {
     function isOk() external view returns (bool);
 }
 
-interface ListInterface {
-    function addAuth(address user) external;
-    function removeAuth(address user) external;
-}
 
 
 contract Record {
+    InstaIndex indexContract;
+    InstaList listContract;
 
     event LogEnable(address indexed user);
     event LogDisable(address indexed user);
@@ -73,7 +69,7 @@ contract Record {
         require(user != address(0), "not-valid");
         require(!auth[user], "already-enabled");
         auth[user] = true;
-        ListInterface(IndexInterface(instaIndex).list()).addAuth(user);
+        listContract.addAuth(user);
         emit LogEnable(user);
     }
 
@@ -86,7 +82,7 @@ contract Record {
         require(user != address(0), "not-valid");
         require(auth[user], "already-disabled");
         delete auth[user];
-        ListInterface(IndexInterface(instaIndex).list()).removeAuth(user);
+        listContract.removeAuth(user);
         emit LogDisable(user);
     }
 
@@ -137,7 +133,7 @@ contract InstaAccount is Record {
     {
         require(isAuth(msg.sender) || msg.sender == instaIndex, "permission-denied");
         require(_targets.length == _datas.length , "array-length-invalid");
-        IndexInterface indexContract = IndexInterface(instaIndex);
+        // IndexInterface indexContract = IndexInterface(instaIndex);
         bool isShield = shield;
         if (!isShield) {
             require(ConnectorsInterface(indexContract.connectors(version)).isConnector(_targets), "not-connector");
