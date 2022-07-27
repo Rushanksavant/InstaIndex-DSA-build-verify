@@ -8,22 +8,26 @@ pragma experimental ABIEncoderV2;
 
 import "./InstaIndex.sol";
 import "./InstaList.sol";
+import "./InstaConnectors.sol";
+import "./InstaCheck.sol";
 
 
-interface ConnectorsInterface {
-    function isConnector(address[] calldata logicAddr) external view returns (bool);
-    function isStaticConnector(address[] calldata logicAddr) external view returns (bool);
-}
+// interface ConnectorsInterface {
+//     function isConnector(address[] calldata logicAddr) external view returns (bool);
+//     function isStaticConnector(address[] calldata logicAddr) external view returns (bool);
+// }
 
-interface CheckInterface {
-    function isOk() external view returns (bool);
-}
+// interface CheckInterface {
+//     function isOk() external view returns (bool);
+// }
 
 
 
 contract Record {
     InstaIndex indexContract;
     InstaList listContract;
+    InstaConnectors connectorsContract;
+    InstaCheck checkContract;
 
     event LogEnable(address indexed user);
     event LogDisable(address indexed user);
@@ -38,9 +42,9 @@ contract Record {
     // Is shield true/false.
     bool public shield;
 
-    constructor (address _instaIndex) {
-        instaIndex = _instaIndex;
-    }
+    // constructor (address _instaIndex) {
+    //     instaIndex = _instaIndex;
+    // }
 
     /**
      * @dev Check for Auth if enabled.
@@ -90,8 +94,8 @@ contract Record {
 
 contract InstaAccount is Record {
 
-    constructor (address _instaIndex) public Record(_instaIndex) {
-    }
+    // constructor (address _instaIndex) public Record(_instaIndex) {
+    // }
 
     event LogCast(address indexed origin, address indexed sender, uint value);
 
@@ -136,15 +140,15 @@ contract InstaAccount is Record {
         // IndexInterface indexContract = IndexInterface(instaIndex);
         bool isShield = shield;
         if (!isShield) {
-            require(ConnectorsInterface(indexContract.connectors(version)).isConnector(_targets), "not-connector");
+            require(connectorsContract.isConnector(_targets), "not-connector");
         } else {
-            require(ConnectorsInterface(indexContract.connectors(version)).isStaticConnector(_targets), "not-static-connector");
+            require(connectorsContract.isStaticConnector(_targets), "not-static-connector");
         }
         for (uint i = 0; i < _targets.length; i++) {
             spell(_targets[i], _datas[i]);
         }
         address _check = indexContract.check(version);
-        if (_check != address(0) && !isShield) require(CheckInterface(_check).isOk(), "not-ok");
+        if (_check != address(0) && !isShield) require(checkContract.isOk(), "not-ok");
         emit LogCast(_origin, msg.sender, msg.value);
     }
 

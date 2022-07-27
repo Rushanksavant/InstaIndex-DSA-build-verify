@@ -15,9 +15,9 @@
             "InstaList": "Contracts\\InstaList.sol"
         },
         "contracts": [
-            "InstaAccount",
             "InstaIndex",
-            "InstaList"
+            "InstaList",
+            "InstaAccount"
         ],
         "debug": null,
         "debug_topics": false,
@@ -29,9 +29,9 @@
         "env": "production",
         "expected_file": "expected.json",
         "file_paths": [
-            "Contracts\\InstaList.sol",
+            "Contracts\\InstaAccount.sol",
             "Contracts\\InstaIndex.sol",
-            "Contracts\\InstaAccount.sol"
+            "Contracts\\InstaList.sol"
         ],
         "file_to_contract": {
             "Contracts\\InstaAccount.sol": [
@@ -136,6 +136,6 @@
         "--solc",
         "solc76"
     ],
-    "revision": "0f29a008dfd6f1cbba559a23f7b36a36092dee30",
-    "timestamp": "1658839314.20224"
+    "revision": "51352fc96a5e2bd5fdb8a90152f35e0a0fb1f468",
+    "timestamp": "1658884029.254211"
 }
