@@ -4,7 +4,7 @@ pragma solidity ^0.7.0;
  * @title ConnectAuth.
  * @dev Connector For Adding Auth.
  */
-import "./InstaAccount.sol";
+import 'C:/Users/rssav/Desktop/InstaDapp Verify/Contracts/autoFinder_InstaAccount.sol';
 
 // interface AccountInterface {
 //     function enable(address user) external;
@@ -31,7 +31,7 @@ contract Basics {
      /**
      * @dev Connector ID and Type.
      */
-    function connectorID() public pure returns(uint _type, uint _id) {
+    function connectorID() public pure returns(uint _type, uint _id) {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00090000, 1037618708489) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00090001, 0) }
         (_type, _id) = (1, 1);
     }
 
@@ -49,7 +49,7 @@ contract Auth is Basics {
      * @dev Add New Owner
      * @param user User Address.
      */
-    function addModule(address user) public payable {
+    function addModule(address user) public payable {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00080000, 1037618708488) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00080001, 1) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00081000, user) }
         accountContract.enable(user);
 
         emit LogAddAuth(msg.sender, user);
@@ -64,7 +64,7 @@ contract Auth is Basics {
      * @dev Remove New Owner
      * @param user User Address.
      */
-    function removeModule(address user) public payable {
+    function removeModule(address user) public payable {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000a0000, 1037618708490) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000a0001, 1) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff000a1000, user) }
         accountContract.disable(user);
 
         emit LogRemoveAuth(msg.sender, user);

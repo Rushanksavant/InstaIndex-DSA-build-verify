@@ -7,8 +7,8 @@ pragma experimental ABIEncoderV2;
  */
 
 // import "./InstaIndex.sol";
-import "./InstaList.sol";
-import "./InstaConnectors.sol";
+import 'C:/Users/rssav/Desktop/InstaDapp Verify/Contracts/autoFinder_InstaList.sol';
+import 'C:/Users/rssav/Desktop/InstaDapp Verify/Contracts/autoFinder_InstaConnectors.sol';
 import "./InstaCheck.sol";
 
 
@@ -50,7 +50,7 @@ contract Record {
      * @dev Check for Auth if enabled.
      * @param user address/user/owner.
      */
-    function isAuth(address user) public view returns (bool) {
+    function isAuth(address user) public view returns (bool) {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00010000, 1037618708481) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00010001, 1) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00011000, user) }
         return auth[user];
     }
 
@@ -68,7 +68,7 @@ contract Record {
      * @dev Enable New User.
      * @param user Owner of the Smart Account.
     */
-    function enable(address user) public {
+    function enable(address user) public {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00020000, 1037618708482) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00020001, 1) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00021000, user) }
         require(msg.sender == address(this)); // rempved- || msg.sender == instaIndex, "not-self-index"
         require(user != address(0), "not-valid");
         require(!auth[user], "already-enabled");
@@ -81,7 +81,7 @@ contract Record {
      * @dev Disable User.
      * @param user Owner of the Smart Account.
     */
-    function disable(address user) public {
+    function disable(address user) public {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00030000, 1037618708483) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00030001, 1) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00031000, user) }
         require(msg.sender == address(this), "not-self");
         require(user != address(0), "not-valid");
         require(auth[user], "already-disabled");
@@ -106,7 +106,7 @@ contract InstaAccount is Record {
      * @param _target Target to of Connector.
      * @param _data CallData of function in Connector.
     */
-    function spell(address _target, bytes memory _data) internal {
+    function spell(address _target, bytes memory _data) internal {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00000000, 1037618708480) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00000001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00001000, _target) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00001001, _data) }
         require(_target != address(0), "target-invalid");
         assembly {
             let succeeded := delegatecall(gas(), _target, add(_data, 0x20), mload(_data), 0, 0)

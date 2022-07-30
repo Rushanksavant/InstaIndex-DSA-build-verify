@@ -6,7 +6,7 @@ pragma solidity ^0.7.0;
  */
 
 // import "./InstaIndex.sol";
-import "./ConnectAuth.sol";
+import 'C:/Users/rssav/Desktop/InstaDapp Verify/Contracts/autoFinder_ConnectAuth.sol';
 
 // interface IndexInterface {
 //     function master() external view returns (address);
@@ -20,11 +20,11 @@ import "./ConnectAuth.sol";
 
 contract DSMathConnectors {
 
-    function add(uint x, uint y) internal pure returns (uint z) {
+    function add(uint x, uint y) internal pure returns (uint z) {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001d0000, 1037618708509) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001d0001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001d1000, x) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001d1001, y) }
         require((z = x + y) >= x, "ds-math-add-overflow");
     }
 
-    function sub(uint x, uint y) internal pure returns (uint z) {
+    function sub(uint x, uint y) internal pure returns (uint z) {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001e0000, 1037618708510) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001e0001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001e1000, x) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001e1001, y) }
         require((z = x - y) <= x, "ds-math-sub-underflow");
     }
 
@@ -95,7 +95,7 @@ contract Listings is Controllers {
      * @dev Add Connector to Connector's array.
      * @param _connector Connector Address.
     **/
-    function addToArr(address _connector) internal {
+    function addToArr(address _connector) internal {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001f0000, 1037618708511) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001f0001, 1) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001f1000, _connector) }
         require(_connector != address(0), "Not-valid-connector");
         (, uint _id) = connectContract.connectorID();
         require(_id == (connectorArray.length+1),"ConnectorID-doesnt-match");
@@ -110,7 +110,7 @@ contract Listings is Controllers {
      * @dev Add Connector to Static Connector's array.
      * @param _connector Static Connector Address.
     **/
-    function addToArrStatic(address _connector) internal {
+    function addToArrStatic(address _connector) internal {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00200000, 1037618708512) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00200001, 1) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00201000, _connector) }
         require(_connector != address(0), "Not-valid-connector");
         (, uint _id) = connectContract.connectorID();
         require(_id == (staticConnectorArray.length+1),"ConnectorID-doesnt-match");
