@@ -10,7 +10,6 @@ rule starter{
 
     env e;
     setBasics(e, _master, _account, _connectors); 
-    address dsa = build(e, owner, 2, 0); 
-    assert dsa == 0, "not";
-    # assert dsa != 0, "not";
+    address dsa = build(e, owner, 1, 0); 
+    assert dsa != 0, "not";
 }

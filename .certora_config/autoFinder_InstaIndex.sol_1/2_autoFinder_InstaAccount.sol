@@ -50,7 +50,7 @@ contract Record {
      * @dev Check for Auth if enabled.
      * @param user address/user/owner.
      */
-    function isAuth(address user) public view returns (bool) {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00140000, 1037618708500) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00140001, 1) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00141000, user) }
+    function isAuth(address user) public view returns (bool) {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001a0000, 1037618708506) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001a0001, 1) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001a1000, user) }
         return auth[user];
     }
 
@@ -68,7 +68,7 @@ contract Record {
      * @dev Enable New User.
      * @param user Owner of the Smart Account.
     */
-    function enable(address user) public {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00150000, 1037618708501) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00150001, 1) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00151000, user) }
+    function enable(address user) public {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001b0000, 1037618708507) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001b0001, 1) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001b1000, user) }
         // require(msg.sender == address(this) || msg.sender == instaIndex, "not-self-index"); // removed
         require(user != address(0), "not-valid");
         require(!auth[user], "already-enabled");
@@ -81,7 +81,7 @@ contract Record {
      * @dev Disable User.
      * @param user Owner of the Smart Account.
     */
-    function disable(address user) public {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00160000, 1037618708502) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00160001, 1) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00161000, user) }
+    function disable(address user) public {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001c0000, 1037618708508) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001c0001, 1) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001c1000, user) }
         require(msg.sender == address(this), "not-self");
         require(user != address(0), "not-valid");
         require(auth[user], "already-disabled");
@@ -106,7 +106,7 @@ contract InstaAccount is Record {
      * @param _target Target to of Connector.
      * @param _data CallData of function in Connector.
     */
-    function spell(address _target, bytes memory _data) internal {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00130000, 1037618708499) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00130001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00131000, _target) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00131001, _data) }
+    function spell(address _target, bytes memory _data) internal {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00190000, 1037618708505) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00190001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00191000, _target) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00191001, _data) }
         require(_target != address(0), "target-invalid");
         assembly {
             let succeeded := delegatecall(gas(), _target, add(_data, 0x20), mload(_data), 0, 0)
