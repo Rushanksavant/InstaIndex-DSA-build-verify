@@ -9,8 +9,8 @@ rule starter{
 
 
     env e;
-    setBasics(e, _master, _account, _connectors);
-    address dsa = build(e, owner, 2, 0);
+    setBasics(e, _master, _account, _connectors); 
+    address dsa = build(e, owner, 2, 0); 
     assert dsa == 0, "not";
-    assert dsa != 0, "not";
+    # assert dsa != 0, "not";
 }

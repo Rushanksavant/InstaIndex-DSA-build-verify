@@ -69,7 +69,7 @@ contract Record {
      * @param user Owner of the Smart Account.
     */
     function enable(address user) public {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00020000, 1037618708482) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00020001, 1) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00021000, user) }
-        require(msg.sender == address(this)); // rempved- || msg.sender == instaIndex, "not-self-index"
+        // require(msg.sender == address(this) || msg.sender == instaIndex, "not-self-index"); // removed
         require(user != address(0), "not-valid");
         require(!auth[user], "already-enabled");
         auth[user] = true;

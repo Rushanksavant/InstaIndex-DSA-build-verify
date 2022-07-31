@@ -15,9 +15,9 @@
             "InstaList": "Contracts\\InstaList.sol"
         },
         "contracts": [
+            "InstaIndex",
             "InstaAccount",
-            "InstaList",
-            "InstaIndex"
+            "InstaList"
         ],
         "debug": null,
         "debug_topics": false,
@@ -29,8 +29,8 @@
         "env": "production",
         "expected_file": "expected.json",
         "file_paths": [
-            "Contracts\\InstaIndex.sol",
             "Contracts\\InstaAccount.sol",
+            "Contracts\\InstaIndex.sol",
             "Contracts\\InstaList.sol"
         ],
         "file_to_contract": {
@@ -79,9 +79,11 @@
         "prototype": null,
         "queue_wait_minutes": null,
         "rule": null,
-        "rule_sanity": null,
+        "rule_sanity": "basic",
         "send_only": false,
-        "settings": null,
+        "settings": [
+            "-ruleSanityChecks=basic"
+        ],
         "short_output": false,
         "smt_timeout": null,
         "solc": "C:/Users/rssav/Desktop/solc/solc76.exe",
@@ -115,6 +117,7 @@
             "InstaIndex:listContract=InstaList"
         ],
         "process": "emv",
+        "rule_sanity": "basic",
         "solc": "solc76",
         "verify": [
             "InstaIndex:all.spec"
@@ -134,8 +137,9 @@
         "--verify",
         "InstaIndex:all.spec",
         "--solc",
-        "solc76"
+        "solc76",
+        "--rule_sanity"
     ],
-    "revision": "08c5f107a5c9cfdf7df949fe46fc7ba33bda3d16",
-    "timestamp": "1659163179.57124"
+    "revision": "93ce8d78def45412e89ada35645f6959e20897f7",
+    "timestamp": "1659231342.224541"
 }

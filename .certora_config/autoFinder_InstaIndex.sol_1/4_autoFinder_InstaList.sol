@@ -10,11 +10,11 @@ pragma solidity ^0.7.0;
 
 contract DSMath {
 
-    function add(uint64 x, uint64 y) internal pure returns (uint64 z) {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00150000, 1037618708501) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00150001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00151000, x) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00151001, y) }
+    function add(uint64 x, uint64 y) internal pure returns (uint64 z) {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00190000, 1037618708505) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00190001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00191000, x) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00191001, y) }
         require((z = x + y) >= x, "ds-math-add-overflow");
     }
 
-    function sub(uint64 x, uint64 y) internal pure returns (uint64 z) {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00180000, 1037618708504) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00180001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00181000, x) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00181001, y) }
+    function sub(uint64 x, uint64 y) internal pure returns (uint64 z) {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001c0000, 1037618708508) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001c0001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001c1000, x) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001c1001, y) }
         require((z = x - y) <= x, "ds-math-sub-underflow");
     }
 
@@ -79,7 +79,7 @@ contract Configure is VariablesList {
      * @param _owner Account Owner.
      * @param _account Smart Account Address.
     */
-    function addAccount(address _owner, uint64 _account) internal {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00130000, 1037618708499) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00130001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00131000, _owner) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00131001, _account) }
+    function addAccount(address _owner, uint64 _account) internal {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00170000, 1037618708503) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00170001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00171000, _owner) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00171001, _account) }
         if (userLink[_owner].last != 0) {
             userList[_owner][_account].prev = userLink[_owner].last;
             userList[_owner][userLink[_owner].last].next = _account;
@@ -94,7 +94,7 @@ contract Configure is VariablesList {
      * @param _owner Account Owner/User.
      * @param _account Smart Account Address.
     */
-    function removeAccount(address _owner, uint64 _account) internal {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00140000, 1037618708500) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00140001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00141000, _owner) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00141001, _account) }
+    function removeAccount(address _owner, uint64 _account) internal {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00180000, 1037618708504) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00180001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00181000, _owner) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00181001, _account) }
         uint64 _prev = userList[_owner][_account].prev;
         uint64 _next = userList[_owner][_account].next;
         if (_prev != 0) userList[_owner][_prev].next = _next;
@@ -110,7 +110,7 @@ contract Configure is VariablesList {
      * @param _owner Account Owner.
      * @param _account Smart Account Address.
     */
-    function addUser(address _owner, uint64 _account) internal {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00160000, 1037618708502) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00160001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00161000, _owner) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00161001, _account) }
+    function addUser(address _owner, uint64 _account) internal {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001a0000, 1037618708506) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001a0001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001a1000, _owner) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001a1001, _account) }
         if (accountLink[_account].last != address(0)) {
             accountList[_account][_owner].prev = accountLink[_account].last;
             accountList[_account][accountLink[_account].last].next = _owner;
@@ -125,7 +125,7 @@ contract Configure is VariablesList {
      * @param _owner Account Owner.
      * @param _account Smart Account Address.
     */
-    function removeUser(address _owner, uint64 _account) internal {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00170000, 1037618708503) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00170001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00171000, _owner) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff00171001, _account) }
+    function removeUser(address _owner, uint64 _account) internal {assembly { mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001b0000, 1037618708507) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001b0001, 2) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001b1000, _owner) mstore(0xffffff6e4604afefe123321beef1b01fffffffffffffffffffffffff001b1001, _account) }
         address _prev = accountList[_account][_owner].prev;
         address _next = accountList[_account][_owner].next;
         if (_prev != address(0)) accountList[_account][_prev].next = _next;
